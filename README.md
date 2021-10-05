@@ -1,1 +1,1 @@
-# 2021-09-otus-java-tsurkan
+Студент: Marina Tsurkan
