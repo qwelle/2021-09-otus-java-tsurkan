@@ -1,67 +1,63 @@
 package homework;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestRunner {
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        TestRunner.run(DemoTest.class);
+        List arrTests = new ArrayList<>();
+        List arrBefore = new ArrayList<>();
+        List arrAfter = new ArrayList<>();
+        List arrSuccess = new ArrayList<>();
+        List arrFailed = new ArrayList<>();
+
+        Class clazz = DemoTest.class;
+
+        prepareData(clazz, arrBefore, arrAfter, arrTests);
+        runTests(clazz, arrBefore, arrAfter, arrTests, arrSuccess, arrFailed);
+        printResult(arrSuccess.size(), arrFailed.size(), arrTests.size());
     }
 
-    static void run(Class<?> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        ArrayList<String> arrTests = new ArrayList<>();
-        ArrayList<String> arrBefore = new ArrayList<>();
-        ArrayList<String> arrAfter = new ArrayList<>();
-
-        ArrayList<String> successArr = new ArrayList<>();
-        ArrayList<String> failedArr = new ArrayList<>();
-
+    private static void prepareData(Class<?> clazz, List arrBefore, List arrAfter, List arrTests) {
         Method[] methods = clazz.getDeclaredMethods();
-
         for(Method method : methods) {
             String methodName = method.getName();
-            Annotation[] annotations = method.getDeclaredAnnotations();
-            for (Annotation annotation : annotations) {
-                switch (annotation.annotationType().getSimpleName()) {
-                    case ("Before"):
-                        arrBefore.add(methodName);
-                        break;
-                    case ("After"):
-                        arrAfter.add(methodName);
-                        break;
-                    case ("Test"):
-                        arrTests.add(methodName);
-                        break;
-                }
-            }
+            if (method.isAnnotationPresent(Before.class))
+                arrBefore.add(methodName);
+            else if (method.isAnnotationPresent(After.class))
+                arrAfter.add(methodName);
+            else if (method.isAnnotationPresent(Test.class))
+                arrTests.add(methodName);
         }
+    }
 
-        for (String testMethod : arrTests) {
+    private static void runTests(Class<?> clazz, List arrBefore, List arrAfter, List arrTests, List arrSuccess, List arrFailed) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        for (Object testMethod : arrTests) {
             System.out.println("------------------------------------");
-            //для каждого класса свой объект
+            //РґР»СЏ РєР°Р¶РґРѕРіРѕ С‚РµСЃС‚Р° СЃРІРѕР№ РєР»Р°СЃСЃ
             Object testClass = clazz.getDeclaredConstructor().newInstance();
 
-            //вызываем методы Before
-            for (String beforeMethod : arrBefore) {
-                Method method = clazz.getMethod(beforeMethod);
+            //РјРµС‚РѕРґС‹ Before
+            for (Object beforeMethod : arrBefore) {
+                Method method = clazz.getMethod(beforeMethod.toString());
                 method.invoke(testClass);
             }
-            //запуск теста
+            //Р·Р°РїСѓСЃРє С‚РµСЃС‚Р°
             try {
-                Method method = clazz.getMethod(testMethod);
+                Method method = clazz.getMethod(testMethod.toString());
                 method.invoke(testClass);
-                successArr.add(testMethod);
+                arrSuccess.add(testMethod);
             } catch (Exception e) {
-                failedArr.add(testMethod);
+                arrFailed.add(testMethod);
                 e.printStackTrace();
             } finally {
-                //методы After
-                for (String afterMethod : arrAfter) {
+                //РјРµС‚РѕРґС‹ After
+                for (Object afterMethod : arrAfter) {
                     try {
-                        Method method = clazz.getMethod(afterMethod);
+                        Method method = clazz.getMethod(afterMethod.toString());
                         method.invoke(testClass);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -69,6 +65,9 @@ public class TestRunner {
                 }
             }
         }
-        System.out.printf("\nУспешно: %d\nУпало: %d\nВсего: %d", successArr.size(), failedArr.size(), arrTests.size());
+    }
+
+    private static void printResult(int sizeArrSuccess, int sizeArrFailed, int sizeArrTests) {
+        System.out.printf("\nРЈСЃРїРµС€РЅРѕ: %d\nРЈРїР°Р»Рѕ: %d\nР’СЃРµРіРѕ: %d", sizeArrSuccess, sizeArrFailed, sizeArrTests);
     }
 }
