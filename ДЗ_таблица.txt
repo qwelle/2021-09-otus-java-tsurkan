@@ -1,0 +1,170 @@
+
+
+AMD Ryzen 7 3750H with Radeon Vega Mobile Gfx 2.30 GHz
+ОЗУ 16ГБ
+Windows 10
+
+------------------------------------
+без опций
+		spend msec:9730, sec:9
+		spend msec:9895, sec:9
+		spend msec:10062, sec:10
+		spend msec:9805, sec:9
+		spend msec:10070, sec:10
+------------------------------------
+-Xms256m
+-Xmx256m
+			java.lang.OutOfMemoryError: Java heap space
+------------------------------------
+-Xmx512m	
+			spend msec:12068, sec:12
+------------------------------------
+-Xms512m		
+-Xmx512m
+			spend msec:12010, sec:12
+			spend msec:11189, sec:11
+------------------------------------			
+-Xms256m
+-Xmx512m		
+			spend msec:11640, sec:11
+------------------------------------
+-Xms256m
+-Xmx1024m		
+			spend msec:11106, sec:11
+------------------------------------
+-Xms768m 
+-Xmx768m		
+			spend msec:10516, sec:10
+------------------------------------
+-Xms1024m 		
+-Xmx1024m		
+			spend msec:10430, sec:10
+			spend msec:10360, sec:10
+------------------------------------
+-Xms256m 		
+-Xmx1280m		
+			spend msec:11355, sec:11
+			spend msec:11320, sec:11
+------------------------------------
+-Xmx1024m		
+			spend msec:11253, sec:11
+			spend msec:11260, sec:11
+------------------------------------
+-Xms256m 
+-Xmx1024m		
+			spend msec:11329, sec:11
+------------------------------------
+-Xmx1280m		
+			spend msec:11020, sec:11
+			spend msec:11183, sec:11
+------------------------------------
+-Xms1280m		
+-Xmx1280m		
+			spend msec:11020, sec:11
+			spend msec:10115, sec:10
+			spend msec:10017, sec:10
+			spend msec:9951, sec:9
+			spend msec:9939, sec:9
+			spend msec:10050, sec:10
+			spend msec:9974, sec:9
+------------------------------------
+-Xms512m
+-Xmx1280m
+			spend msec:11200, sec:11
+			spend msec:10973, sec:10
+			spend msec:10723, sec:10
+------------------------------------
+-Xms1280m 
+-Xmx1536m
+			spend msec:10047, sec:10
+			spend msec:10154, sec:10
+			spend msec:10153, sec:10
+
+------------------------------------
+-Xms1536m 
+-Xmx1536m
+			spend msec:9837, sec:9
+			spend msec:9585, sec:9
+			spend msec:9784, sec:9
+------------------------------------
+-Xmx1536m
+			spend msec:11174, sec:11
+			spend msec:11191, sec:11
+------------------------------------
+-Xms1536m 									<----------
+-Xmx1792m
+			spend msec:8796, sec:8
+			spend msec:8636, sec:8
+			spend msec:8839, sec:8
+			spend msec:8707, sec:8
+			spend msec:8864, sec:8
+			spend msec:8851, sec:8
+------------------------------------
+-Xmx1792m
+			spend msec:10998, sec:10
+			spend msec:11271, sec:11
+
+------------------------------------
+-Xms1792m 
+-Xmx1792m
+			spend msec:9007, sec:9
+			spend msec:9016, sec:9
+			spend msec:9095, sec:9
+------------------------------------
+-Xms1536m 
+-Xmx2048m
+			spend msec:9246, sec:9
+			spend msec:9277, sec:9
+			spend msec:9454, sec:9
+------------------------------------
+-Xms2048m  
+-Xmx2048m
+			spend msec:9587, sec:9
+			spend msec:9472, sec:9
+------------------------------------
+-Xms1280m  
+-Xmx1792m
+			spend msec:10338, sec:10
+			spend msec:10212, sec:10
+------------------------------------
+-Xms1792m  
+-Xmx2048m
+			spend msec:9658, sec:9
+------------------------------------
+-Xms1536m  
+-Xmx2560m
+			spend msec:10063, sec:10
+			spend msec:9913, sec:9
+			spend msec:9854, sec:9			
+			
+--------ПОСЛЕ ЗАМЕНЫ ВСЕХ INTEGER НА INT:
+Без опций
+			spend msec:1996, sec:1
+			spend msec:1971, sec:1
+------------------------------------
+-Xms256m 
+-Xmx256m
+			spend msec:3208, sec:3
+			spend msec:2692, sec:2
+------------------------------------
+-Xms256m 
+-Xmx512m
+			spend msec:2356, sec:2
+			spend msec:2368, sec:2
+------------------------------------
+-Xms512m 									<----------
+-Xmx512m
+			spend msec:1856, sec:1
+			spend msec:1827, sec:1
+			spend msec:1817, sec:1
+------------------------------------
+-Xms512m 
+-Xmx768m
+			spend msec:1838, sec:1
+			spend msec:1799, sec:1
+			spend msec:1930, sec:1
+------------------------------------
+-Xms512m 
+-Xmx1024m
+			spend msec:1959, sec:1			
+------------------------------------			
