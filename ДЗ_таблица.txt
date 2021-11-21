@@ -91,7 +91,7 @@ Windows 10
 			spend msec:11174, sec:11
 			spend msec:11191, sec:11
 ------------------------------------
--Xms1536m 									<----------
+-Xms1536m 									<----------ОПТИМАЛЬНЫЙ РАЗМЕР ХИПА ДО ДОРАБОТКИ
 -Xmx1792m
 			spend msec:8796, sec:8
 			spend msec:8636, sec:8
@@ -136,8 +136,10 @@ Windows 10
 			spend msec:10063, sec:10
 			spend msec:9913, sec:9
 			spend msec:9854, sec:9			
-			
+
+------------------------------------			
 --------ПОСЛЕ ЗАМЕНЫ ВСЕХ INTEGER НА INT:
+
 Без опций
 			spend msec:1996, sec:1
 			spend msec:1971, sec:1
@@ -152,7 +154,7 @@ Windows 10
 			spend msec:2356, sec:2
 			spend msec:2368, sec:2
 ------------------------------------
--Xms512m 									<----------
+-Xms512m 									<----------ОПТИМАЛЬНЫЙ РАЗМЕР ХИПА C INT
 -Xmx512m
 			spend msec:1856, sec:1
 			spend msec:1827, sec:1
@@ -167,4 +169,33 @@ Windows 10
 -Xms512m 
 -Xmx1024m
 			spend msec:1959, sec:1			
+			
 ------------------------------------			
+--------С ПЕРЕИСПОЛЬЗОВАНИЕМ ОБЪЕКТА DATA:
+Без опций
+			spend msec:1375, sec:1
+			spend msec:1250, sec:1
+			spend msec:1245, sec:1
+			spend msec:1327, sec:1
+
+-Xms256m 									<----------ОПТИМАЛЬНЫЙ РАЗМЕР ХИПА C INT и ПЕРЕИСПОЛЬЗОВАНИЕМ ОБЪЕКТА
+-Xmx256m
+			spend msec:1194, sec:1
+			spend msec:1187, sec:1
+			spend msec:1145, sec:1
+			spend msec:1209, sec:1
+
+-Xms256m 
+-Xmx512m
+			spend msec:1232, sec:1
+			spend msec:1178, sec:1
+			spend msec:1177, sec:1
+			spend msec:1187, sec:1
+
+-Xms512m 									
+-Xmx512m
+			spend msec:1251, sec:1
+			spend msec:1302, sec:1
+
+------------------------------------
+			
