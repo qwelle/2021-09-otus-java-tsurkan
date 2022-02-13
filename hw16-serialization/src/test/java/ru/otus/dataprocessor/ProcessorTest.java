@@ -6,6 +6,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +19,7 @@ class ProcessorTest {
     //сам тест менять нельзя
     @Test
     @DisplayName("Из файла читается json, обрабатывается, результат сериализуется в строку")
-    void processingTest(@TempDir Path tempDir) throws IOException {
+    void processingTest(@TempDir Path tempDir) throws IOException, URISyntaxException {
         System.out.println(tempDir);
 
         //given

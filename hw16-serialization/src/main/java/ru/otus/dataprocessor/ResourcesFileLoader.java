@@ -6,21 +6,21 @@ import ru.otus.model.Measurement;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResourcesFileLoader implements Loader {
     private final ObjectMapper mapper = new ObjectMapper();
-    private final String fileName;
+    private final File file;
 
-    public ResourcesFileLoader(String fileName) {
-        this.fileName = System.getProperty("user.dir") + File.separator + "src\\test\\resources\\" + fileName;
+    public ResourcesFileLoader(String fileName) throws URISyntaxException {
+        this.file = new File(getClass().getClassLoader().getResource(fileName).toURI());
     }
 
     @Override
     public List<Measurement> load() throws FileProcessException {
         //читает файл, парсит и возвращает результат
-        File file = new File(fileName);
         List<Measurement> list = new ArrayList<>();
         try {
             JsonNode root = mapper.readTree(file);
