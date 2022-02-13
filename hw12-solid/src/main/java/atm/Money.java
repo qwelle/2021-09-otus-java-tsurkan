@@ -1,19 +1,8 @@
 package atm;
 
-public class Money {
-    private final Nominal nominal;
-    private final Integer qnty;
-
-    public Money(Nominal nominal, Integer qnty) {
-        this.nominal = nominal;
-        this.qnty = qnty;
-    }
-
-    public Integer getQnty() {
-        return this.qnty;
-    }
-
-    public Nominal getNominal() {
-        return nominal;
-    }
+public interface Money {
+    Nominal getNominal();
+    int getQnty();
+    void addSomeQnty(int qnty);
+    void getSomeQnty(int qnty);
 }

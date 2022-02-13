@@ -8,13 +8,13 @@ public enum Nominal {
     n2000(2000),
     n5000(5000);
 
-    private int id;
+    private final int value;
 
-    Nominal(int id) {
-        this.id = id;
+    Nominal(int value) {
+        this.value = value;
     }
 
-    public int getId() {
-        return id;
+    public int getValue() {
+        return value;
     }
 }
