@@ -13,6 +13,6 @@ include 'hw04-generics'
 include 'hw06-reflections'
 include 'hw08-gc'
 include 'hw10-aop'
+include 'hw12-solid'
 include 'hw15-structuralPatterns'
 include 'hw16-serialization'
-
