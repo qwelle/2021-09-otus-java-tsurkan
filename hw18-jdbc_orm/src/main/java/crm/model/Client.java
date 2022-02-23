@@ -1,6 +1,7 @@
 package crm.model;
 
 public class Client {
+    @Id
     private Long id;
     private String name;
 
