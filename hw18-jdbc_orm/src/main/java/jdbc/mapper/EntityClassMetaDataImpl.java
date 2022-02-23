@@ -4,6 +4,7 @@ import crm.model.Id;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
@@ -38,7 +39,10 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     @Override
     public List<Field> getFieldsWithoutId() {
-        List<Field> listFields = getAllFields();
+        List<Field> listFields = new ArrayList<>();
+        for (Field field : getAllFields()) {
+            listFields.add(field);
+        }
         listFields.remove(getIdField());
         return listFields;
     }

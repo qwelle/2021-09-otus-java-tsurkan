@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
-
     private final EntityClassMetaData entityClassMetaData;
 
     public EntitySQLMetaDataImpl(EntityClassMetaData entityClassMetaData) {
@@ -24,8 +23,10 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
 
     @Override
     public String getInsertSql() {
-        String fields = getFieldsInRow(entityClassMetaData.getFieldsWithoutId());
-        return "insert into " + entityClassMetaData.getName() + "(" + fields + ") values (?)";
+        List<Field> listField = entityClassMetaData.getFieldsWithoutId();
+        String fields = getFieldsInRow(listField);
+        String questionMark = "?" + ",?".repeat(listField.size()-1);
+        return "insert into " + entityClassMetaData.getName() + "(" + fields + ") values (" + questionMark + ")";
     }
 
     @Override
@@ -45,10 +46,11 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
     private String getFieldsInRow(List<Field> fields) {
         String fieldsInRow = "";
         for (int i = 0; i < fields.size(); i++) {
+            String stringField = fields.get(i).getName();
             if (i == 0) {
-                fieldsInRow.concat(fields.get(i).getName());
+                fieldsInRow += stringField;
             } else {
-                fieldsInRow.concat(", " + fields.get(i).getName());
+                fieldsInRow += ", " + stringField;
             }
         }
         return fieldsInRow;
