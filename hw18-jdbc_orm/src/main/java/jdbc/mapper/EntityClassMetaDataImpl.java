@@ -9,54 +9,50 @@ import java.util.List;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
-    private final Class<?> clazz;
+    private final String className;
+    private Field fieldId;
+    private final List<Field> allFields;
+    private final List<Field> fieldsWithoutId = new ArrayList<>();
+    private final Constructor<T> constructor;
 
-    public EntityClassMetaDataImpl(Class<?> clazz) {
-        this.clazz = clazz;
+    public EntityClassMetaDataImpl(Class<T> clazz) throws ReflectiveOperationException {
+        this.className = clazz.getSimpleName();
+        this.allFields = List.of(clazz.getDeclaredFields());
+        for(Field field : this.allFields) {
+            if (field.isAnnotationPresent(Id.class)) {
+                this.fieldId = field;
+                break;
+            }
+        }
+        for (Field field : this.allFields) {
+            if (!field.equals(this.fieldId))
+            fieldsWithoutId.add(field);
+        }
+        this.constructor = clazz.getDeclaredConstructor();
     }
 
     @Override
     public String getName() {
-       return clazz.getSimpleName();
+       return this.className;
     }
 
     @Override
     public List<Field> getAllFields() {
-        return List.of(clazz.getDeclaredFields());
+        return this.allFields;
     }
 
     @Override
     public Field getIdField() {
-        Field fieldId = null;
-        for(Field field : getAllFields()) {
-            if (field.isAnnotationPresent(Id.class)) {
-                fieldId = field;
-                break;
-            }
-        }
-        return fieldId;
+        return this.fieldId;
     }
 
     @Override
     public List<Field> getFieldsWithoutId() {
-        List<Field> listFields = new ArrayList<>();
-        for (Field field : getAllFields()) {
-            listFields.add(field);
-        }
-        listFields.remove(getIdField());
-        return listFields;
+        return this.fieldsWithoutId;
     }
 
     @Override
     public Constructor<T> getConstructor() {
-        Constructor<T> requiredContrs = null;
-        for(Constructor<?> constructor : clazz.getConstructors()) {
-            //ищем конструктор, где кол-во параметров соответствует кол-ву полей объекта
-            if (constructor.getParameterTypes().length == getAllFields().size()) {
-                requiredContrs = (Constructor<T>) constructor;
-                break;
-            }
-        }
-        return requiredContrs;
+        return this.constructor;
     }
 }
