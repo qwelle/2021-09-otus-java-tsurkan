@@ -23,9 +23,9 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
         String fieldsInRow = "";
         for (int i = 0; i < listFieldsWithoutId.size(); i++) {
             if (i == listFieldsWithoutId.size() - 1) {
-                fieldsInRow.concat(listFieldsWithoutId.get(i).getName() + " = ? ");
+                fieldsInRow = fieldsInRow.concat(listFieldsWithoutId.get(i).getName() + " = ? ");
             } else {
-                fieldsInRow.concat(listFieldsWithoutId.get(i).getName() + " = ?, ");
+                fieldsInRow = fieldsInRow.concat(listFieldsWithoutId.get(i).getName() + " = ?, ");
             }
         }
         this.updateSql = "update " + entityClassMetaData.getName() + " set " + fieldsInRow + " where id = ?";
